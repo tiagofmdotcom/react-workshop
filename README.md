@@ -8,3 +8,9 @@
 - Add new contacts
 - Edit existing contacts
 - Delete contacts
+
+---
+
+## Docs
+
+[Session 1](/docs/SESSION1.md)
