@@ -1,5 +1,7 @@
 // ContactCard.jsx
 import React from 'react';
+//import css styles
+import './styles.css';
 
 const ContactCard = () => {
   const name = 'Mr. Whiskerson';
@@ -18,7 +20,7 @@ const ContactCard = () => {
   return (
     // and we pass that dynamic property to the inline style attribute of the div
     <div style={styles}>
-      <h3>{name}</h3>
+      <h3 className='person-name'>{name}</h3> {/* We use the class name here */}
       <p>Email: {email}</p>
       <p>Phone: {phone}</p>
     </div>
