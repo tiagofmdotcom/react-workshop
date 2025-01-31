@@ -14,4 +14,5 @@
 ## Docs
 
 [Session 1](/docs/SESSION1.md)
+
 [Session 2](/docs/SESSION2.md)
