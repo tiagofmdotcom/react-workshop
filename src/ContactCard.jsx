@@ -27,11 +27,12 @@ const ContactCard = (props) => {
   };
 
   const cardStyles = isFavorite ? { ...styles, ...favoriteStyles } : styles; // we merge the styles based on the isFavorite state
+  const personNameClasses = isFavorite ? 'person-name favorite' : 'person-name'; // we create a dynamic class name based on the isFavorite state
 
   return (
     // and we pass that dynamic property to the inline style attribute of the div
     <div style={cardStyles}>
-      <h3 className='person-name'>{props.name}</h3>{' '}
+      <h3 className={personNameClasses}>{props.name}</h3> {/* We use the variable here */}
       {/* We use the class name here */}
       <p>Email: {props.email}</p>
       <p>Phone: {props.phone}</p>
