@@ -1,3 +1,19 @@
+### **Session 2: Components and JSX**
+
+**Pre-requirements:**
+Have `node.js` v18+ and `yarn` installed:
+
+- https://nodejs.org/en/download
+- https://classic.yarnpkg.com/lang/en/docs/install/
+- Check correct `yarn` installation by running `yarn --version`
+
+Have completed previous sessions [#1](SESSION1.md) [#2](SESSION2.md)
+
+**Steps:**
+
+- Modify the `ContactCard.jsx` to get the contact data via props:
+
+```jsx
 // ContactCard.jsx
 import React from 'react';
 //import css styles
@@ -26,3 +42,4 @@ const ContactCard = (props) => {
 };
 
 export default ContactCard;
+```

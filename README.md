@@ -16,3 +16,5 @@
 [Session 1](/docs/SESSION1.md)
 
 [Session 2](/docs/SESSION2.md)
+
+[Session 3](/docs/SESSION3.md)
