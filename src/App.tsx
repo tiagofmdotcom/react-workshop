@@ -12,6 +12,17 @@ function App() {
         email='jcena@wwe.com'
         phone='800-NO-SEE-ME'
       />
+      {/* we can create multiple instances of the component with different props*/}
+      <ContactCard
+        name='Chuck Norries'
+        email='outlook@com.chucknorries'
+        phone='555-TX-RANGER'
+      />
+      <ContactCard
+        name='András István Arató'
+        email='harold@gmail.com'
+        phone='800-HIDE-PAIN'
+      />
       {/* <---- Now e can use the component */}
       {/* Also, Hi👋 I'm a JSX comment! */}
     </main>
