@@ -295,3 +295,7 @@ const ContactCard = (props) => {
 
 export default ContactCard;
 ```
+---
+
+**Final result:**
+![alt text](SESSION3-RESULT.png)
