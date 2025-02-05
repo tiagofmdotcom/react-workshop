@@ -16,9 +16,17 @@ const ContactCard = (props) => {
     margin: '10px 0',
   };
 
+  // Styles for when a contact is a favorite
+  const favoriteStyles = {
+    backgroundColor: 'rgba(255, 222, 73, 0.15)',
+    border: '1px solid #f0c711'
+  };
+
+  const cardStyles = isFavorite ? { ...styles, ...favoriteStyles } : styles; // we merge the styles based on the isFavorite state
+
   return (
     // and we pass that dynamic property to the inline style attribute of the div
-    <div style={styles}>
+    <div style={cardStyles}>
       <h3 className='person-name'>{props.name}</h3>{' '}
       {/* We use the class name here */}
       <p>Email: {props.email}</p>
