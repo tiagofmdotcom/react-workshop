@@ -8,6 +8,7 @@ Have `node.js` v18+ and `yarn` installed:
 - Check correct `yarn` installation by running `yarn --version`
 
 Have completed previous sessions [#1](SESSION1.md) [#2](SESSION2.md)
+Have **React Devtools** browser extension installed: [Chrome-based](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
 
 ---
 
