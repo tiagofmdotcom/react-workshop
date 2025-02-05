@@ -7,6 +7,10 @@ import './styles.css';
 const ContactCard = (props) => {
   const [isFavorite, setIsFavorite] = React.useState(false); // the state that tracks if the contact is a favorite
 
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite); // toggle the state
+  }
+
   // We create an object with the styles (kebab-case becomes camelCase)
   const styles = {
     border: '1px solid #eaeaea',
@@ -34,7 +38,8 @@ const ContactCard = (props) => {
       
       {/* create this wrapping div so we can align the button to the right */}
       <div style={{ display: 'flex', justifyContent: 'end' }}>
-        <button>Mark as favorite</button> {/* We add a button */}
+        {/* link the onClick with the handleFavorite method */}
+        <button onClick={handleFavorite}>Mark as favorite</button> {/* We add a button */}
       </div>
     </div>
   );
