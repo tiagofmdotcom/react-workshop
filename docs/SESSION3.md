@@ -9,6 +9,10 @@ Have `node.js` v18+ and `yarn` installed:
 
 Have completed previous sessions [#1](SESSION1.md) [#2](SESSION2.md)
 
+---
+
+#### Props practice
+
 **Steps:**
 
 - Modify the `ContactCard.jsx` to get the contact data via props:
