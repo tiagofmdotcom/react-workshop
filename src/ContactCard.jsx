@@ -5,6 +5,8 @@ import './styles.css';
 
 // props are passed to a React component as the first argument of the function
 const ContactCard = (props) => {
+  const [isFavorite, setIsFavorite] = React.useState(false); // the state that tracks if the contact is a favorite
+
   // We create an object with the styles (kebab-case becomes camelCase)
   const styles = {
     border: '1px solid #eaeaea',

@@ -151,3 +151,12 @@ const ContactCard = (props) => {
 
 export default ContactCard;
 ```
+
+- Create a state that allows us to track if said contact is been marked as favorite:
+```jsx
+// ContactCard.jsx
+
+const ContactCard = (props) => {
+  const [isFavorite, setIsFavorite] = React.useState(false); // the state that tracks if the contact is a favorite
+
+```
