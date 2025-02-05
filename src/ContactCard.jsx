@@ -21,6 +21,11 @@ const ContactCard = (props) => {
       {/* We use the class name here */}
       <p>Email: {props.email}</p>
       <p>Phone: {props.phone}</p>
+      
+      {/* create this wrapping div so we can align the button to the right */}
+      <div style={{ display: 'flex', justifyContent: 'end' }}>
+        <button>Mark as favorite</button> {/* We add a button */}
+      </div>
     </div>
   );
 };
