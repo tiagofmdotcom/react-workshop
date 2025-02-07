@@ -40,7 +40,7 @@ const ContactCard = (props) => {
       {/* create this wrapping div so we can align the button to the right */}
       <div style={{ display: 'flex', justifyContent: 'end' }}>
         {/* link the onClick with the handleFavorite method */}
-        <button onClick={handleFavorite}>Mark as favorite</button> {/* We add a button */}
+        <button onClick={handleFavorite}>{isFavorite ? 'Remove from' : 'Mark as'} favorite</button>  {/* We add a button */}
       </div>
     </div>
   );
