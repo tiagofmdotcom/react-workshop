@@ -1,4 +1,4 @@
-### **Session 2: Components and JSX**
+### **Session 3: Props, State, and Events**
 
 **Pre-requirements:**
 Have `node.js` v18+ and `yarn` installed:
