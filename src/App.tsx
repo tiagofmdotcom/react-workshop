@@ -28,7 +28,12 @@ function App() {
     );
   }, [contacts]); // Recalculate only when contacts change
 
-  
+  // Define the function to remove a contact
+  const handleRemove = (email) => {
+    // we'll use the email as the unique identifier for the contact
+    setContacts((prevContacts) => prevContacts.filter((c) => c.email !== email));
+  }	
+
   return (
     <main className='container'>
       <h1>Contacts Manager</h1>
@@ -44,6 +49,7 @@ function App() {
           email={contact.email}
           phone={contact.phone}
           photo={contact.photo} // we need to consume this new prop in the ContactCar.jsx to display the photo
+          onRemove={handleRemove} // we need to consume this new prop in the ContactCar.jsx to remove the contact
         />
       ))}
     </main>
