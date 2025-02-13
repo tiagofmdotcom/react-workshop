@@ -225,7 +225,7 @@ export default App;
 //App.tsx
       
       {// Let's validate if there are contacts to display
-       (!contacts) && <p>No contacts found (yet!)</p>
+       (!contacts?.length || !contactsWithPhotos?.length) && <p>No contacts found (yet!)</p>
       }
 ```
 
