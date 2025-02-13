@@ -11,6 +11,10 @@ const ContactCard = (props) => {
     setIsFavorite(!isFavorite); // toggle the state
   }
 
+  const handleRemove = () => {
+    props.onRemove(props.email); // call the onRemove function passed as a prop with the email of the contact
+  }
+
   // We create an object with the styles (kebab-case becomes camelCase)
   const styles = {
     border: '1px solid #eaeaea',
@@ -40,7 +44,9 @@ const ContactCard = (props) => {
       <p>Phone: {props.phone}</p>
       
       {/* create this wrapping div so we can align the button to the right */}
-      <div style={{ display: 'flex', justifyContent: 'end' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}> {/* Change the alignment between the buttons */}
+        <button onClick={handleRemove} className='secondary'>❌</button> {/* the remove button */}
+
         {/* link the onClick with the handleFavorite method */}
         <button onClick={handleFavorite}>{isFavorite ? 'Remove from' : 'Mark as'} favorite</button>  {/* We add a button */}
       </div>

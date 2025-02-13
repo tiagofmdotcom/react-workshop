@@ -229,6 +229,24 @@ export default App;
       }
 ```
 
+- Lets add a button to remove, on the `ContactCard.jsx`:
+```jsx
+// ContactCard.jsx
+
+  const handleRemove = () => {
+    props.onRemove(props.id); // call the onRemove function passed as a prop with the id of the contact
+  }
+
+ // ...
+      
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}> {/* Change the alignment between the buttons */}
+        <button onClick={handleRemove} className='secondary'>❌</button> {/* the remove button */}
+
+        {/* link the onClick with the handleFavorite method */}
+        <button onClick={handleFavorite}>{isFavorite ? 'Remove from' : 'Mark as'} favorite</button>  {/* We add a button */}
+      </div>
+```
+
 ---
 
 **Final result:**
