@@ -32,6 +32,8 @@ const ContactCard = (props) => {
   return (
     // and we pass that dynamic property to the inline style attribute of the div
     <div style={cardStyles}>
+      <img src={props.photo} alt={props.name} style={{ width: '100px', borderRadius: '50%' }} />
+
       <h3 className={personNameClasses}>{props.name}</h3> {/* We use the variable here */}
       {/* We use the class name here */}
       <p>Email: {props.email}</p>
