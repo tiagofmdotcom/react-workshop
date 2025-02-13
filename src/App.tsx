@@ -28,10 +28,14 @@ function App() {
     );
   }, [contacts]); // Recalculate only when contacts change
 
-      
+  
   return (
     <main className='container'>
       <h1>Contacts Manager</h1>
+      
+      {// Let's validate if there are contacts to display
+       (!contacts) && <p>No contacts found (yet!)</p>
+      }
 
       {contactsWithPhotos?.map((contact, index) => (  // Nullish coalescing operator to prevent errors when contacts is null: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
         <ContactCard

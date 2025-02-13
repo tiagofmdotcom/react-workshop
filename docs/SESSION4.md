@@ -215,8 +215,18 @@ export default App;
 
 - We need to modify `ContactCard.jsx` to show the photo:
 ```jsx
+// ContactCard.jsx
     <div style={cardStyles}>
       <img src={props.photo} alt={props.name} style={{ width: '100px', borderRadius: '50%' }} />
+```
+
+- Lets add some conditional rendering if we don't get any contacts data in our `App.tsx`:
+```jsx
+//App.tsx
+      
+      {// Let's validate if there are contacts to display
+       (!contacts) && <p>No contacts found (yet!)</p>
+      }
 ```
 
 ---
