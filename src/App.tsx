@@ -26,26 +26,14 @@ function App() {
     <main className='container'>
       <h1>Contacts Manager</h1>
 
-      {/* we pass data via the attributes (aka, props) of our component */}
-      <ContactCard
-        name={contacts[0].name}
-        email={contacts[0].email}
-        phone={contacts[0].phone}
-      />
-      {/* we can create multiple instances of the component with different props*/}
-      <ContactCard
-        name={contacts[1].name}
-        email={contacts[1].email}
-        phone={contacts[1].phone}
-      />
-      {/* we binding the state array items */}
-      <ContactCard
-        name={contacts[2].name}
-        email={contacts[2].email}
-        phone={contacts[2].phone}
-      />
-      {/* <---- Now e can use the component */}
-      {/* Also, Hi👋 I'm a JSX comment! */}
+      {contacts.map((contact, index) => (
+        <ContactCard
+          key={index} /* don't forget the key, so react properly keeps track of mutation that require rerender */
+          name={contact.name}
+          email={contact.email}
+          phone={contact.phone}
+        />
+      ))}
     </main>
   );
 }
