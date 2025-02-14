@@ -234,7 +234,7 @@ export default App;
 // ContactCard.jsx
 
   const handleRemove = () => {
-    props.onRemove(props.id); // call the onRemove function passed as a prop with the id of the contact
+    props.onRemove(props.email); // call the onRemove function passed as a prop with the email of the contact
   }
 
  // ...
@@ -248,7 +248,7 @@ export default App;
 ```
 
 - But before it works, we need to handle the called event `onRemove` on the parent (`App.tsx`):
-```
+```jsx
 // App.tsx
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
@@ -444,5 +444,8 @@ export default App;
 
 ---
 
-**Final result:**
-![alt text](SESSION4-RESULT.png)
+# Final result:
+
+![alt text](SESSION4-RESULT1.png)
+---
+![alt text](SESSION4-RESULT2.png)
