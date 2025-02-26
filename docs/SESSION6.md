@@ -148,6 +148,73 @@ export const StyledFormRow = styled.div`
 `;
 ```
 
+- Lets bind the state to form inputs - aka, 2 way binding:
+```jsx
+// ContactForm.jsx
+
+import { StyledFormContainer, StyledFormRow } from './styles';
+import { useState } from 'react';
+
+export default function ContactForm() {
+  const currId = crypto.getRandomValues(new Uint32Array(1)).at(0);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    photo: `https://picsum.photos/seed/${currId}/100/100`,
+    id: currId,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  return (
+    <StyledFormContainer>
+      <StyledFormRow>ID: {formData.id}</StyledFormRow>
+
+      <StyledFormRow>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onInput={handleChange}
+        />
+      </StyledFormRow>
+      <StyledFormRow>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onInput={handleChange}
+        />
+      </StyledFormRow>
+      <StyledFormRow>
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={formData.phone}
+          onInput={handleChange}
+        />
+      </StyledFormRow>
+      <StyledFormRow>
+        Photo: <img width='100' src={formData.photo} alt={formData.name} />
+      </StyledFormRow>
+    </StyledFormContainer>
+  );
+}
+```
+
 
 ---
 
