@@ -31,7 +31,7 @@ function App() {
       </StyledRow>
       
       {showForm ? 
-        <ContactForm contactDataHook={contactDataHook}/> :
+        <ContactForm contactDataHook={contactDataHook} onSubmit={() => setShowForm(false)}/> :
         <ContactList contactDataHook={contactDataHook}/>
       }
     </main>

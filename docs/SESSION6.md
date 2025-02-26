@@ -463,6 +463,14 @@ export default function ContactForm() {
   }
 ```
 
+- And handle the navigation in the new event on `App.tsx`
+```jsx
+      {showForm ? 
+        <ContactForm contactDataHook={contactDataHook} onSubmit={() => setShowForm(false)}/> :
+        <ContactList contactDataHook={contactDataHook}/>
+      }
+```
+
 ---
 
 # Final result:
