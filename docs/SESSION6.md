@@ -333,6 +333,7 @@ export default function ContactForm() {
   );
   }
   ```
+
 - Now, back to our form, we can add a save button, that submits the form:
 ```jsx
 // ContactForm.jsx
@@ -407,6 +408,35 @@ export default function ContactForm() {
     </StyledFormContainer>
   );
 }
+```
+
+- lets extend the `useContactData` hook to allow adding contacts:
+```jsx
+  const contactsWithPhotos = useMemo(() => {
+    if (!contacts) return null;
+
+    return contacts.map((contact) => {
+      const gender = contact.id % 2 === 0 ? 'men' : 'women';
+      return { photo: `https://randomuser.me/api/portraits/${gender}/${contact.id}.jpg`, ...contact }; // reverse the order so we dont overwrite
+    });
+  }, [contacts]);
+
+  const handleRemove = (email) => {
+    setContacts((prevContacts) => prevContacts.filter((c) => c.email !== email));
+  };
+
+  // Add a function to add a contact
+  const addContact = (contact) => {
+    setContacts((prevContacts) => [...prevContacts, contact]);
+  }
+
+  return {
+    contacts: contactsWithPhotos,
+    handleRemove,
+    refetchContacts: () => setRefetchContacts(true),
+    isLoading: contacts === null, // Add loading state
+    addContact, // return the function to add a contact
+  };
 ```
 
 ---

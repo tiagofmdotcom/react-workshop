@@ -22,7 +22,7 @@ export default function useContactData() {
 
     return contacts.map((contact) => {
       const gender = contact.id % 2 === 0 ? 'men' : 'women';
-      return { ...contact, photo: `https://randomuser.me/api/portraits/${gender}/${contact.id}.jpg` };
+      return { photo: `https://randomuser.me/api/portraits/${gender}/${contact.id}.jpg`, ...contact }; // reverse the order so we dont overwrite
     });
   }, [contacts]);
 
@@ -30,10 +30,16 @@ export default function useContactData() {
     setContacts((prevContacts) => prevContacts.filter((c) => c.email !== email));
   };
 
+  // Add a function to add a contact
+  const addContact = (contact) => {
+    setContacts((prevContacts) => [...prevContacts, contact]);
+  }
+
   return {
     contacts: contactsWithPhotos,
     handleRemove,
     refetchContacts: () => setRefetchContacts(true),
     isLoading: contacts === null, // Add loading state
+    addContact, // return the function to add a contact
   };
 }
