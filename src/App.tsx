@@ -3,14 +3,23 @@
 // @ts-nocheck
 import ContactList from './ContactList.jsx';
 import { StyledButton, StyledRow } from './styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContactForm from './ContactForm.jsx';
+import useContactData from './useContactData';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const contactDataHook = useContactData();
+
+  useEffect(() => {
+  if(!contactDataHook.contacts?.length){
+    contactDataHook.refetchContacts();
+  }
+  }, [contactDataHook, contactDataHook.contacts]);
 
   return (
     <main className='container'>
+
       <StyledRow>
         <h1>Contacts Manager</h1>
         <StyledButton
@@ -23,7 +32,7 @@ function App() {
       
       {showForm ? 
         <ContactForm /> :
-        <ContactList />
+        <ContactList contactDataHook={contactDataHook}/>
       }
     </main>
   );
