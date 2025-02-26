@@ -1,6 +1,6 @@
 // ContactForm.jsx
 
-import { StyledFormContainer, StyledFormRow } from './styles';
+import { StyledFormContainer, StyledFormRow, StyledFooter } from './styles';
 import { useState } from 'react';
 
 export default function ContactForm() {
@@ -21,8 +21,13 @@ export default function ContactForm() {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`submited! ${JSON.stringify(formData)}`);
+  }
+
   return (
-    <StyledFormContainer>
+    <StyledFormContainer onSubmit={handleSubmit}>
       <StyledFormRow>ID: {formData.id}</StyledFormRow>
 
       <StyledFormRow>
@@ -57,6 +62,10 @@ export default function ContactForm() {
       </StyledFormRow>
       <StyledFormRow>
         Photo: <img width='100' src={formData.photo} alt={formData.name} />
+      </StyledFormRow>
+      <hr />
+      <StyledFormRow>
+        <button type='submit'>Save</button>
       </StyledFormRow>
     </StyledFormContainer>
   );
