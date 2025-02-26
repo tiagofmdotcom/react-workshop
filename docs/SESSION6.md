@@ -62,8 +62,17 @@ margin-top: 10px;
 `;
 ```
 
-
-
+- Now we create a new component for the form editor `ContactForm.jsx`:
+```jsx
+// ContactForm.jsx
+export default function ContactForm() {
+    return (
+        <div>
+            <h1>Contact Form</h1>
+        </div>
+    )
+}
+```
 
 ---
 
