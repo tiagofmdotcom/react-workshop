@@ -454,6 +454,15 @@ export default function ContactForm() {
       }
 ```
 
+- Lets redirect the user, by calling a onSubmit event (`ContactForm.jsx`):
+```jsx
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.contactDataHook.addContact(formData);
+    props.onSubmit();
+  }
+```
+
 ---
 
 # Final result:

@@ -23,6 +23,7 @@ export default function ContactForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.contactDataHook.addContact(formData);
+    props.onSubmit();
   }
 
   return (
