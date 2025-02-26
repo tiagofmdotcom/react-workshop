@@ -1,4 +1,4 @@
-### **Session 4: Lifecycle vs Hooks, Lists, Keys, and Conditional Rendering**
+### **Session 5: Styled Components**
 
 **Pre-requirements:**
 Have `node.js` v18+ and `yarn` installed:
