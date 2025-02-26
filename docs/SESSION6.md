@@ -214,7 +214,48 @@ export default function ContactForm() {
   );
 }
 ```
+- But now we have an issue. We need to save our form and add the record to contacts list, here's how we can solve:
+  - Extract contact list state into a hook, let's create a  `useContactData.js`:
+```jsx
+// useContactData.js
+import { useState, useEffect, useMemo } from 'react';
 
+export default function useContactData() {
+  const [contacts, setContacts] = useState(null);
+  const [refetchContacts, setRefetchContacts] = useState(false);
+
+  useEffect(() => {
+    if(!refetchContacts) return; // Let's not auto fetch on mount, rather on-demand
+
+    const fetchContacts = async () => {
+      const data = await fetch('https://jsonplaceholder.typicode.com/users').then((res) => res.json());
+      setContacts(data);
+      setRefetchContacts(false);
+    };
+
+    fetchContacts();
+  }, [refetchContacts]);
+
+  const contactsWithPhotos = useMemo(() => {
+    if (!contacts) return null;
+
+    return contacts.map((contact) => {
+      const gender = contact.id % 2 === 0 ? 'men' : 'women';
+      return { ...contact, photo: `https://randomuser.me/api/portraits/${gender}/${contact.id}.jpg` };
+    });
+  }, [contacts]);
+
+  const handleRemove = (email) => {
+    setContacts((prevContacts) => prevContacts.filter((c) => c.email !== email));
+  };
+
+  return {
+    contacts: contactsWithPhotos,
+    handleRemove,
+    refetchContacts: () => setRefetchContacts(true),
+    isLoading: contacts === null, // Add loading state
+  };
+}
 
 ---
 
