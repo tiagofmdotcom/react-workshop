@@ -39,6 +39,29 @@ function App() {
 
 export default App;
 ```
+- and then extend our styles to include the **StyledRow** and the new button variant color:
+```jsx
+// styles.jsx
+// variant to color
+const colorVariants = {
+  primary: '#017fc0',
+  secondary: '#484f8d',
+  danger: '#b32828',
+  success: '#3e8914',
+};
+export const StyledButton = styled.button`
+  background-color:
+    ${(props) => colorVariants[props.$variant] || colorVariants.primary};
+  color: white;
+`;
+
+export const StyledRow = styled.div`
+margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+`;
+```
+
 
 
 
