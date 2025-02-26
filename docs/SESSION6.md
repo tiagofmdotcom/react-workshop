@@ -137,7 +137,16 @@ export default function ContactForm() {
   );
 }
 ```
+- and the styles:
+```jsx
+export const StyledFormContainer = styled(StyledContactCard).attrs({ as : 'form' })`
+  padding: 20px;
+`;
 
+export const StyledFormRow = styled.div`
+  margin-bottom: 5px;
+`;
+```
 
 
 ---

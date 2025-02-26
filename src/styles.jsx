@@ -55,3 +55,11 @@ margin-top: 10px;
   display: flex;
   justify-content: space-between;
 `;
+
+export const StyledFormContainer = styled(StyledContactCard).attrs({ as : 'form' })`
+  padding: 20px;
+`;
+
+export const StyledFormRow = styled.div`
+  margin-bottom: 5px;
+`;
