@@ -1,9 +1,8 @@
 // ContactForm.jsx
-
-import { StyledFormContainer, StyledFormRow, StyledFooter } from './styles';
+import { StyledFormContainer, StyledFormRow } from './styles';
 import { useState } from 'react';
 
-export default function ContactForm() {
+export default function ContactForm(props) {
   const currId = crypto.getRandomValues(new Uint32Array(1)).at(0);
   const [formData, setFormData] = useState({
     name: '',
@@ -23,7 +22,7 @@ export default function ContactForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`submited! ${JSON.stringify(formData)}`);
+    props.contactDataHook.addContact(formData);
   }
 
   return (

@@ -439,6 +439,21 @@ export default function ContactForm() {
   };
 ```
 
+- so now we can use it on the `ContactForm`:
+```jsx
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.contactDataHook.addContact(formData);
+  }
+```
+- Don't forget to pass the hook instance on the `App.tsx`
+```jsx
+      {showForm ? 
+        <ContactForm contactDataHook={contactDataHook}/> :
+        <ContactList contactDataHook={contactDataHook}/>
+      }
+```
+
 ---
 
 # Final result:
