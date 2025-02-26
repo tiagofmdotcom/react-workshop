@@ -3,17 +3,28 @@
 // @ts-nocheck
 import ContactList from './ContactList.jsx';
 import { StyledButton, StyledRow } from './styles';
+import { useState } from 'react';
+import ContactForm from './ContactForm.jsx';
 
 function App() {
-  
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <main className='container'>
       <StyledRow>
         <h1>Contacts Manager</h1>
-        <StyledButton $variant="success">Add contact</StyledButton>
+        <StyledButton
+          $variant="success"
+          onClick={() => setShowForm(!showForm)}
+        >
+          {showForm ? 'Show Contacts' : 'Add Contact'}
+        </StyledButton>
       </StyledRow>
       
-      <ContactList />
+      {showForm ? 
+        <ContactForm /> :
+        <ContactList />
+      }
     </main>
   );
 }
