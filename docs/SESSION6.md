@@ -1,4 +1,4 @@
-### **Session 5: Forms & Controlled Components**
+### **Session 6: Forms & Controlled Components**
 
 **Pre-requirements:**
 Have `node.js` v18+ and `yarn` installed:
@@ -325,8 +325,8 @@ export default function ContactForm() {
           name={contact.name}
           email={contact.email}
           phone={contact.phone}
-          photo={contact.photo} // we need to consume this new prop in the ContactCar.jsx to display the photo
-          onRemove={handleRemove} // we need to consume this new prop in the ContactCar.jsx to remove the contact
+          photo={contact.photo} // we need to consume this new prop in the ContactCard.jsx to display the photo
+          onRemove={handleRemove} // we need to consume this new prop in the ContactCard.jsx to remove the contact
         />
       ))}
     </div>
@@ -454,7 +454,7 @@ export default function ContactForm() {
       }
 ```
 
-- Lets redirect the user, by calling a onSubmit event (`ContactForm.jsx`):
+- Lets redirect the user back to the list, by calling a onSubmit event (`ContactForm.jsx`):
 ```jsx
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -476,3 +476,4 @@ export default function ContactForm() {
 # Final result:
 
 ![alt text](SESSION6-RESULT.png)
+![alt text](SESSION6-RESULT2.png)
