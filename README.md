@@ -24,3 +24,5 @@
 [Session 5](/docs/SESSION5.md)
 
 [Session 6](/docs/SESSION6.md)
+
+[Session 7](/docs/SESSION7.md)
