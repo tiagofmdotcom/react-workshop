@@ -21,7 +21,7 @@ Goal: Fix state sharing issues by using useContext
 - rename useContactData hook to accept jsx
 - Adapt the hook to useContext
 ```jsx
-// useContactData.js
+// useContactData.jsx
 import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 
 const ContactContext = createContext(null);
