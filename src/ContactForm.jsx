@@ -1,9 +1,12 @@
 // ContactForm.jsx
 import { StyledFormContainer, StyledFormRow } from './styles';
 import { useState } from 'react';
+import { useContacts } from './useContactData.jsx';
 
-export default function ContactForm(props) {
+export default function ContactForm({ onSubmit }) {
+  const { addContact } = useContacts();
   const currId = crypto.getRandomValues(new Uint32Array(1)).at(0);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,17 +17,17 @@ export default function ContactForm(props) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.contactDataHook.addContact(formData);
-    props.onSubmit();
-  }
+    addContact(formData);
+    onSubmit();
+  };
 
   return (
     <StyledFormContainer onSubmit={handleSubmit}>
@@ -37,7 +40,7 @@ export default function ContactForm(props) {
           id="name"
           name="name"
           value={formData.name}
-          onInput={handleChange}
+          onChange={handleChange} // Use onChange instead of onInput for React best practices
         />
       </StyledFormRow>
       <StyledFormRow>
@@ -47,7 +50,7 @@ export default function ContactForm(props) {
           id="email"
           name="email"
           value={formData.email}
-          onInput={handleChange}
+          onChange={handleChange}
         />
       </StyledFormRow>
       <StyledFormRow>
@@ -57,15 +60,15 @@ export default function ContactForm(props) {
           id="phone"
           name="phone"
           value={formData.phone}
-          onInput={handleChange}
+          onChange={handleChange}
         />
       </StyledFormRow>
       <StyledFormRow>
-        Photo: <img width='100' src={formData.photo} alt={formData.name} />
+        Photo: <img width="100" src={formData.photo} alt={formData.name} />
       </StyledFormRow>
       <hr />
       <StyledFormRow>
-        <button type='submit'>Save</button>
+        <button type="submit">Save</button>
       </StyledFormRow>
     </StyledFormContainer>
   );
