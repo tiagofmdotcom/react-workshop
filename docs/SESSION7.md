@@ -15,8 +15,11 @@ Have **React Devtools** browser extension installed: [Chrome-based](https://chro
 
 #### Practice
 
-**Steps:**
+Goal: Fix state sharing issues by using useContext
 
+**Steps:**
+- rename useContactData hook to accept jsx
+-
 
 
 ---
