@@ -5,21 +5,20 @@ import ContactList from './ContactList.jsx';
 import { StyledButton, StyledRow } from './styles';
 import { useState, useEffect } from 'react';
 import ContactForm from './ContactForm.jsx';
-import useContactData from './useContactData';
+import { ContactProvider, useContacts } from './useContactData';
 
-function App() {
+function ContactManager() {
   const [showForm, setShowForm] = useState(false);
-  const contactDataHook = useContactData();
+  const { contacts, refetchContacts } = useContacts();
 
   useEffect(() => {
-  if(!contactDataHook.contacts?.length){
-    contactDataHook.refetchContacts();
-  }
-  }, [contactDataHook, contactDataHook.contacts]);
+    if (!contacts?.length) {
+      refetchContacts();
+    }
+  }, [contacts, refetchContacts]);
 
   return (
     <main className='container'>
-
       <StyledRow>
         <h1>Contacts Manager</h1>
         <StyledButton
@@ -31,11 +30,17 @@ function App() {
       </StyledRow>
       
       {showForm ? 
-        <ContactForm contactDataHook={contactDataHook} onSubmit={() => setShowForm(false)}/> :
-        <ContactList contactDataHook={contactDataHook}/>
+        <ContactForm onSubmit={() => setShowForm(false)} /> :
+        <ContactList />
       }
     </main>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ContactProvider>
+      <ContactManager />
+    </ContactProvider>
+  );
+}
