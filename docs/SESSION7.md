@@ -244,3 +244,4 @@ export default function ContactForm({ onSubmit }) {
 
 # Final result:
 
+-- Nothing should change! This was just a refactor --
