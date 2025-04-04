@@ -36,13 +36,18 @@ export function ContactProvider({ children }) {
     setContacts((prevContacts) => [...prevContacts, contact]);
   };
 
+  const updateContact = (contact) => {
+    setContacts((prevContacts) => prevContacts.map((c) => (c.id === contact.id ? contact : c)));
+  };
+
   return (
     <ContactContext.Provider value={{
       contacts: contactsWithPhotos,
       handleRemove,
       refetchContacts: () => setRefetchContacts(true),
       isLoading: contacts === null,
-      addContact
+      addContact,
+      updateContact, // <------------------- Dont forget to export
     }}>
       {children}
     </ContactContext.Provider>

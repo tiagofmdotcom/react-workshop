@@ -257,6 +257,59 @@ export default function App() {
       </StyledButton>
     ```
 
+- Now we just need to handle contact update:
+  - create a "updateContact" method on our contact hook:
+  ```jsx
+    // useContactData.js
+    import { createContext, useContext, useState, useEffect, useMemo } from 'react';
+
+    const ContactContext = createContext(null);
+
+    export function ContactProvider({ children }) {
+      // (...)
+
+      const updateContact = (contact) => {
+        setContacts((prevContacts) => prevContacts.map((c) => (c.id === contact.id ? contact : c)));
+      };
+
+      return (
+        <ContactContext.Provider value={{
+          contacts: contactsWithPhotos,
+          handleRemove,
+          refetchContacts: () => setRefetchContacts(true),
+          isLoading: contacts === null,
+          addContact,
+          updateContact, // <------------------- Dont forget to export
+        }}>
+          {children}
+        </ContactContext.Provider>
+      );
+    }
+
+    export function useContacts() {
+      return useContext(ContactContext);
+    }
+  
+  ```
+  - and on the Contact Form, we make use of it on the "onSubmit" method:
+  ```jsx
+    export default function ContactForm({ onSubmit }) {
+    const { addContact, contacts, updateContact } = useContacts();
+    
+    // (...)
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      if(isNewContact) {      
+      addContact(formData);
+      } else {
+        updateContact(formData);
+      }
+      onSubmit();
+    };
+
+  ```
+
 
 
 ---

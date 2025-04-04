@@ -5,7 +5,7 @@ import { useContacts } from './useContactData.jsx';
 import { useParams, Link } from 'react-router';
 
 export default function ContactForm({ onSubmit }) {
-  const { addContact, contacts } = useContacts();
+  const { addContact, contacts, updateContact } = useContacts();
   const params = useParams();
   const isNewContact = !params.id;
 
@@ -41,7 +41,11 @@ export default function ContactForm({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(isNewContact) {      
     addContact(formData);
+    } else {
+      updateContact(formData);
+    }
     onSubmit();
   };
 
