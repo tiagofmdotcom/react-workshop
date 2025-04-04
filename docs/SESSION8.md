@@ -19,8 +19,23 @@ Goal: Create routes for the create/edit Contact form
 
 **Steps:**
 
-- Install add react-router dependency:
-`yarn react-router`
+- Install add react-router dependency: `yarn react-router`
+
+- On `App.tsx` add the Router Provider:
+```jsx
+// App.tsx
+import { BrowserRouter } from 'react-router';
+
+export default function App() {
+  return (
+    <ContactProvider>
+      <BrowserRouter>
+        <ContactManager />
+      </BrowserRouter>
+    </ContactProvider>
+  );
+}
+```
 
 ---
 
