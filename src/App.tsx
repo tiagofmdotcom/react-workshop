@@ -3,13 +3,41 @@
 // @ts-nocheck
 import ContactList from './ContactList.jsx';
 import { StyledButton, StyledRow } from './styles';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ContactForm from './ContactForm.jsx';
 import { ContactProvider, useContacts } from './useContactData';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route, Link, Outlet, useLocation, useNavigate } from 'react-router';
+import React from 'react';
 
-function ContactManager() {
-  const [showForm, setShowForm] = useState(false);
+function MainLayout() {
+  const location = useLocation();
+  
+  const isFormPage = React.useMemo(() => {
+    return location.pathname === '/contact';
+  }, [location.pathname]);
+
+  return (
+    <main className="container">
+      <StyledRow>
+        <h1>Contacts Manager</h1>
+        <nav>
+        {isFormPage ? (
+            <Link to="/">
+              <StyledButton $variant="secondary">View Contacts</StyledButton>
+            </Link>
+          ) : (
+            <Link to="/contact">
+              <StyledButton $variant="success">Add Contact</StyledButton>
+            </Link>
+          )}
+        </nav>
+      </StyledRow>
+      <Outlet />
+    </main>
+  );
+}
+
+function ContactIndexPage() {
   const { contacts, refetchContacts } = useContacts();
 
   useEffect(() => {
@@ -18,24 +46,12 @@ function ContactManager() {
     }
   }, [contacts, refetchContacts]);
 
-  return (
-    <main className='container'>
-      <StyledRow>
-        <h1>Contacts Manager</h1>
-        <StyledButton
-          $variant="success"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Show Contacts' : 'Add Contact'}
-        </StyledButton>
-      </StyledRow>
-      
-      {showForm ? 
-        <ContactForm onSubmit={() => setShowForm(false)} /> :
-        <ContactList />
-      }
-    </main>
-  );
+  return <ContactList />;
+}
+
+function ContactFormPage() {
+  const navigate = useNavigate();
+  return <ContactForm onSubmit={() => navigate('/')} />;
 }
 
 export default function App() {
@@ -43,7 +59,10 @@ export default function App() {
     <ContactProvider>
       <BrowserRouter>
         <Routes>
-          <Route index element={<ContactManager />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<ContactIndexPage />} />
+            <Route path="contact" element={<ContactFormPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ContactProvider>

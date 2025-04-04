@@ -55,6 +55,81 @@ export default function App() {
 }
 ```
 
+- Lets break down the list/form render logic, so it relies on routes instead of component state:
+  - Move the shared layout to a reusable component that contains an outlet:
+  ```jsx
+    import { BrowserRouter, Routes, Route, Link, Outlet, useLocation, useNavigate } from 'react-router';
+    import React from 'react';
+
+    export default function App() {
+      return (
+        <ContactProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<ContactIndexPage />} />
+                <Route path="contact" element={<ContactFormPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ContactProvider>
+      );
+    }
+  ```
+
+  - Create the shared layout component:
+  ```jsx
+  function MainLayout() {
+    const location = useLocation();
+    
+    const isFormPage = React.useMemo(() => {
+      return location.pathname === '/contact';
+    }, [location.pathname]);
+
+    return (
+      <main className="container">
+        <StyledRow>
+          <h1>Contacts Manager</h1>
+          <nav>
+          {isFormPage ? (
+              <Link to="/">
+                <StyledButton $variant="secondary">View Contacts</StyledButton>
+              </Link>
+            ) : (
+              <Link to="/contact">
+                <StyledButton $variant="success">Add Contact</StyledButton>
+              </Link>
+            )}
+          </nav>
+        </StyledRow>
+        <Outlet />
+      </main>
+    );
+  }
+  ```
+
+  - And finally the list render and the form render into 2 components:
+  ```jsx
+  function ContactIndexPage() {
+  const { contacts, refetchContacts } = useContacts();
+
+  useEffect(() => {
+      if (!contacts?.length) {
+        refetchContacts();
+      }
+    }, [contacts, refetchContacts]);
+
+    return <ContactList />;
+  }
+
+  function ContactFormPage() {
+    const navigate = useNavigate();
+    return <ContactForm onSubmit={() => navigate('/')} />;
+  }
+  ```
+
+
+
 ---
 
 # Final result:
