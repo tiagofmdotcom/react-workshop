@@ -37,6 +37,24 @@ export default function App() {
 }
 ```
 
+- Add default route:
+```jsx
+// App.tsx
+import { BrowserRouter, Routes, Route } from 'react-router';
+
+export default function App() {
+  return (
+    <ContactProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<ContactManager />} />
+        </Routes>
+      </BrowserRouter>
+    </ContactProvider>
+  );
+}
+```
+
 ---
 
 # Final result:

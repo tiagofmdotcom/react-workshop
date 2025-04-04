@@ -6,7 +6,7 @@ import { StyledButton, StyledRow } from './styles';
 import { useState, useEffect } from 'react';
 import ContactForm from './ContactForm.jsx';
 import { ContactProvider, useContacts } from './useContactData';
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, Routes, Route } from 'react-router';
 
 function ContactManager() {
   const [showForm, setShowForm] = useState(false);
@@ -42,7 +42,9 @@ export default function App() {
   return (
     <ContactProvider>
       <BrowserRouter>
-        <ContactManager />
+        <Routes>
+          <Route index element={<ContactManager />} />
+        </Routes>
       </BrowserRouter>
     </ContactProvider>
   );
