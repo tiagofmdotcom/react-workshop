@@ -11,6 +11,14 @@ import React from 'react';
 
 function MainLayout() {
   const location = useLocation();
+
+  const { contacts, refetchContacts } = useContacts();
+
+  useEffect(() => {
+    if (!contacts?.length) {
+      refetchContacts();
+    }
+  }, [contacts, refetchContacts]);
   
   const isFormPage = React.useMemo(() => {
     return location.pathname === '/contact';
@@ -38,14 +46,6 @@ function MainLayout() {
 }
 
 function ContactIndexPage() {
-  const { contacts, refetchContacts } = useContacts();
-
-  useEffect(() => {
-    if (!contacts?.length) {
-      refetchContacts();
-    }
-  }, [contacts, refetchContacts]);
-
   return <ContactList />;
 }
 
