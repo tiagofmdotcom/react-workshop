@@ -26,3 +26,5 @@
 [Session 6](/docs/SESSION6.md)
 
 [Session 7](/docs/SESSION7.md)
+
+[Session 8](/docs/SESSION8.md)
