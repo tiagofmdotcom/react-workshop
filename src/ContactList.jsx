@@ -17,6 +17,7 @@ export default function ContactList() {
       {contacts?.map((contact) => (
         <ContactCard
           key={contact.id} // Unique key for React to track changes properly
+          id={contact.id}
           name={contact.name}
           email={contact.email}
           phone={contact.phone}

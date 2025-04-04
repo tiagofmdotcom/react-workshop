@@ -1,19 +1,35 @@
 // ContactForm.jsx
 import { StyledFormContainer, StyledFormRow } from './styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useContacts } from './useContactData.jsx';
+import { useParams, Link } from 'react-router';
 
 export default function ContactForm({ onSubmit }) {
-  const { addContact } = useContacts();
-  const currId = crypto.getRandomValues(new Uint32Array(1)).at(0);
+  const { addContact, contacts } = useContacts();
+  const params = useParams();
+  const isNewContact = !params.id;
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    photo: `https://picsum.photos/seed/${currId}/100/100`,
-    id: currId,
-  });
+  const [formData, setFormData] = useState(null);
+
+  useEffect(() => {
+    if (!isNewContact) {
+      const contact = contacts?.find((contact) => contact.id === parseInt(params.id));
+      if (contact) {
+        setFormData(contact);
+      }
+    } else {
+      const newId = crypto.getRandomValues(new Uint32Array(1)).at(0);
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        photo: `https://picsum.photos/seed/${newId}/100/100`,
+        id: newId,
+      });
+    }
+  }, [isNewContact, params.id, contacts]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +44,13 @@ export default function ContactForm({ onSubmit }) {
     addContact(formData);
     onSubmit();
   };
+
+  if (!formData) {
+    return <div>
+      <p>Something went wrong</p>
+      <Link to="/">Go back</Link>
+    </div>
+  }
 
   return (
     <StyledFormContainer onSubmit={handleSubmit}>

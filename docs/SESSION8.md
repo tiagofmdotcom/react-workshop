@@ -128,6 +128,135 @@ export default function App() {
   }
   ```
 
+- Now we can easily reuse the form view to provide contact editing functionality:
+  - First we define the route:
+  ```jsx
+    <Route path="contact/:id" element={<ContactFormPage />} />
+  ```
+  - And then adapt the ContactForm component:
+  ```jsx
+    // ContactForm.jsx
+    import { StyledFormContainer, StyledFormRow } from './styles';
+    import { useState, useEffect } from 'react';
+    import { useContacts } from './useContactData.jsx';
+    import { useParams, Link } from 'react-router';
+
+    export default function ContactForm({ onSubmit }) {
+      const { addContact, contacts } = useContacts();
+      const params = useParams();
+      const isNewContact = !params.id;
+
+      const [formData, setFormData] = useState(null);
+
+      useEffect(() => {
+        if (!isNewContact) {
+          const contact = contacts?.find((contact) => contact.id === parseInt(params.id));
+          if (contact) {
+            setFormData(contact);
+          }
+        } else {
+          const newId = crypto.getRandomValues(new Uint32Array(1)).at(0);
+
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            photo: `https://picsum.photos/seed/${newId}/100/100`,
+            id: newId,
+          });
+        }
+      }, [isNewContact, params.id, contacts]);
+      
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        addContact(formData);
+        onSubmit();
+      };
+
+      if (!formData) {
+        return <div>
+          <p>Something went wrong</p>
+          <Link to="/">Go back</Link>
+        </div>
+      }
+
+      return (
+        <StyledFormContainer onSubmit={handleSubmit}>
+          <StyledFormRow>ID: {formData.id}</StyledFormRow>
+
+          <StyledFormRow>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange} // Use onChange instead of onInput for React best practices
+            />
+          </StyledFormRow>
+          <StyledFormRow>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </StyledFormRow>
+          <StyledFormRow>
+            <label htmlFor="phone">Phone:</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </StyledFormRow>
+          <StyledFormRow>
+            Photo: <img width="100" src={formData.photo} alt={formData.name} />
+          </StyledFormRow>
+          <hr />
+          <StyledFormRow>
+            <button type="submit">Save</button>
+          </StyledFormRow>
+        </StyledFormContainer>
+      );
+    }
+  ```
+  - And finally we can add a link button to be able to edit each contact data
+    - Lets pass the id prop to the ContactCard, for that change the ContactList:
+    ```jsx
+      {contacts?.map((contact) => (
+        <ContactCard
+          key={contact.id} // Unique key for React to track changes properly
+          id={contact.id}
+          name={contact.name}
+          email={contact.email}
+          phone={contact.phone}
+          photo={contact.photo}
+          onRemove={() => handleRemove(contact.email)} // Pass down remove function
+        />
+      ))}
+    ```
+    - And at last, add the link button on the ContactCard:
+    ```jsx
+      {/* Edit contact button */}
+      <StyledButton $variant="secondary">
+        <Link to={`/contact/${props.id}`}>Edit</Link>
+      </StyledButton>
+    ```
+
 
 
 ---

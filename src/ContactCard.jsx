@@ -1,6 +1,7 @@
 // ContactCard.jsx
 import React from 'react';
 import { StyledAvatar, StyledButton, StyledContactCard, StyledContactName, StyledFooter } from './styles'; // import the styled component
+import { Link } from 'react-router';
 
 // props are passed to a React component as the first argument of the function
 const ContactCard = (props) => {
@@ -32,6 +33,11 @@ const ContactCard = (props) => {
           ⛌
         </StyledButton> {/* the remove button */}
 
+        {/* Edit contact button */}
+        <StyledButton $variant="secondary">
+          <Link to={`/contact/${props.id}`}>Edit</Link>
+        </StyledButton>
+
         {/* link the onClick with the handleFavorite method */}
         <StyledButton
           onClick={handleFavorite}
@@ -39,6 +45,7 @@ const ContactCard = (props) => {
         >
           {isFavorite ? 'Remove from' : 'Mark as'} favorite
         </StyledButton>  {/* We add a button */}
+
       </StyledFooter>
     </StyledContactCard>
   );

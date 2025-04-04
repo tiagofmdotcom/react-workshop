@@ -62,6 +62,7 @@ export default function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<ContactIndexPage />} />
             <Route path="contact" element={<ContactFormPage />} />
+            <Route path="contact/:id" element={<ContactFormPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
