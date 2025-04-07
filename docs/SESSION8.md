@@ -19,7 +19,7 @@ Goal: Create routes for the create/edit Contact form
 
 **Steps:**
 
-- Install add react-router dependency: `yarn react-router`
+- Install add react-router dependency: `yarn add react-router`
 
 - On `App.tsx` add the Router Provider:
 ```jsx
@@ -388,3 +388,4 @@ export default function App() {
 ---
 
 # Final result:
+![alt text](SESSION8-RESULT.png)
