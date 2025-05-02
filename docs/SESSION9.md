@@ -23,3 +23,4 @@ Goals:
 
 **Steps:**
 
+- To make our React code Typescript, we need to rename all file extensions from `.js|.jsx` to `.ts|.tsx`
