@@ -1,24 +1,28 @@
-// ContactForm.jsx
+// ContactForm.tsx
 import { StyledFormContainer, StyledFormRow } from './styles';
 import { useState, useEffect } from 'react';
-import { useContacts } from './useContactData.jsx';
+import { type Contact, useContacts } from './useContactData.jsx';
 import { useParams, Link } from 'react-router';
 
-export default function ContactForm({ onSubmit }) {
-  const { addContact, contacts, updateContact } = useContacts();
-  const params = useParams();
-  const isNewContact = !params.id;
+interface ContactFormProps {
+  onSubmit: () => void;
+}
 
-  const [formData, setFormData] = useState(null);
+export default function ContactForm({ onSubmit }: ContactFormProps) {
+  const { addContact, contacts, updateContact } = useContacts();
+  const { id } = useParams<{ id: string }>();
+  const isNewContact = !id;
+
+  const [formData, setFormData] = useState<Contact>({} as Contact);
 
   useEffect(() => {
     if (!isNewContact) {
-      const contact = contacts?.find((contact) => contact.id === parseInt(params.id));
+      const contact = contacts?.find((contact) => contact.id === parseInt(id));
       if (contact) {
         setFormData(contact);
       }
     } else {
-      const newId = crypto.getRandomValues(new Uint32Array(1)).at(0);
+      const newId = crypto.getRandomValues(new Uint32Array(1)).at(0)!;
 
       setFormData({
         name: '',
@@ -28,10 +32,10 @@ export default function ContactForm({ onSubmit }) {
         id: newId,
       });
     }
-  }, [isNewContact, params.id, contacts]);
+  }, [isNewContact, id, contacts]);
   
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -39,7 +43,7 @@ export default function ContactForm({ onSubmit }) {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(isNewContact) {      
     addContact(formData);
