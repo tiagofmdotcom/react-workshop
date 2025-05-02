@@ -360,3 +360,7 @@ Goals:
   }
   
   ```
+
+- We can run the linter, but most of the issues we had were Typescript related.
+
+- Time to install React Testing Library: `yarn add --dev @testing-library/react @testing-library/jest-dom jest ts-jest @types/jest`

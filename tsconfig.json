@@ -3,5 +3,15 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["dom", "es2022"],
+    "jsx": "react-jsx", // Enables JSX support
+    "esModuleInterop": true, // Fixes the React import issue
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true, // Allows default imports for CommonJS modules
+    "strict": true,
+    "skipLibCheck": true // Avoids type-checking issues in node_modules
+  }
 }
