@@ -5,8 +5,8 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "target": "es2022",
-    "lib": ["dom", "es2022"],
+    "target": "ESNext",
+    "lib": ["dom", "ESNext"],
     "jsx": "react-jsx", // Enables JSX support
     "esModuleInterop": true, // Fixes the React import issue
     "moduleResolution": "node",
