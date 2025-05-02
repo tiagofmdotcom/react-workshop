@@ -1,10 +1,32 @@
-// useContactData.js
+// useContactData.tsx
 import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 
-const ContactContext = createContext(null);
+type ContactProviderProps = {
+  children: React.ReactNode;
+};
 
-export function ContactProvider({ children }) {
-  const [contacts, setContacts] = useState(null);
+export type Contact = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  photo?: string;
+};
+
+
+export type ContactContextType = {
+  contacts: Contact[] | null; 
+  handleRemove: (email: string) => void;
+  refetchContacts: () => void;
+  isLoading: boolean;
+  addContact: (contact: Contact) => void;
+  updateContact: (contact: Contact) => void;
+};
+
+const ContactContext = createContext<ContactContextType>({} as ContactContextType);
+
+export function ContactProvider({ children } : ContactProviderProps) {
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [refetchContacts, setRefetchContacts] = useState(false);
 
   useEffect(() => {
@@ -28,15 +50,15 @@ export function ContactProvider({ children }) {
     });
   }, [contacts]);
 
-  const handleRemove = (email) => {
+  const handleRemove = (email: string) => {
     setContacts((prevContacts) => prevContacts.filter((c) => c.email !== email));
   };
 
-  const addContact = (contact) => {
+  const addContact = (contact: Contact) => {
     setContacts((prevContacts) => [...prevContacts, contact]);
   };
 
-  const updateContact = (contact) => {
+  const updateContact = (contact: Contact) => {
     setContacts((prevContacts) => prevContacts.map((c) => (c.id === contact.id ? contact : c)));
   };
 
