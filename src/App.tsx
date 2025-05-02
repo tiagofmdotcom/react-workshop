@@ -1,6 +1,4 @@
 // App.tsx
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import ContactList from './ContactList.jsx';
 import { StyledButton, StyledRow } from './styles';
 import { useEffect } from 'react';
