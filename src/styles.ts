@@ -1,8 +1,8 @@
-// styles.jsx
+// styles.ts
 import styled from 'styled-components';
 
 // copy styles from ContactCard.jsx
-export const StyledContactCard = styled.div`
+export const StyledContactCard = styled.div<{ $isFavorite?: boolean }>`
   border: 1px solid #eaeaea;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
@@ -15,7 +15,7 @@ export const StyledContactCard = styled.div`
   `} // reuse the favoriteStyles here
 `;
 
-export const StyledContactName = styled.h3`
+export const StyledContactName = styled.h3<{ $isFavorite?: boolean }>`
   font-size: 1.5rem;
   font-weight: bold;
   color: #8e73ad;
@@ -25,7 +25,7 @@ export const StyledContactName = styled.h3`
   `}
 `;
 
-export const StyledAvatar = styled.img`
+export const StyledAvatar = styled.img<{ $isFavorite?: boolean, $isRound?: boolean }>`
   width: 100px;
   ${(props) => props.$isRound && `
     border-radius: 50%;
@@ -44,9 +44,9 @@ const colorVariants = {
   danger: '#b32828',
   success: '#3e8914',
 };
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{ $variant?: keyof typeof colorVariants }>`
   background-color:
-    ${(props) => colorVariants[props.$variant] || colorVariants.primary};
+    ${(props) => colorVariants[props.$variant || 'primary']};
   color: white;
 `;
 
