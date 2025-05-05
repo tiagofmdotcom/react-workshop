@@ -473,3 +473,5 @@ describe('useContacts hook', () => {
   });
 });
 ```
+
+- Time to introduce Storybook, first install: `yarn create storybook`, and follow the wizard
