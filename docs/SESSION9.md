@@ -25,7 +25,9 @@ Goals:
 
 - To make our React code Typescript, we need to rename all file extensions from `.js|.jsx` to `.ts|.tsx`
 
-- Next we comments that disabled lint rules, and then we start the fun!![s9-errors.png](s9-errors.png)
+- Next we comments that disabled lint rules, and then we start the fun!
+
+![s9-errors.png](s9-errors.png)
 
 - Lets start the fixing:
   - `styles.tsx`
